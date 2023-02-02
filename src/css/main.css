@@ -1,0 +1,23 @@
+ion-modal#modal-style {
+  --border-radius: 16px;
+}
+
+.list-additional-style {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.center-button {
+  display: grid;
+  justify-content: center;
+}
+
+.disponible {
+  color: rgb(30, 127, 3);
+  font-weight: bold;
+}
+.loue {
+  color: rgb(150, 24, 24);
+  font-weight: bold;
+}

@@ -31,6 +31,10 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 
+import "./css/main.css";
+
+import {Vehicles} from "./features/vehicules/pages/Vehicles";
+
 setupIonicReact();
 
 const App: React.FC = () => (
@@ -43,10 +47,10 @@ const App: React.FC = () => (
             from="/"
             to="/vehicles"
           />
-          {/* <Route
+          <Route
             exact
             path="/vehicles"
-            component={Vehicles}></Route> */}
+            component={Vehicles}></Route>
           {/* <Route
             exact
             path="/clients"

@@ -1,0 +1,36 @@
+.vehicle-card-content {
+  padding-inline-start: 20px;
+  padding-bottom: 0;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.location-text {
+  margin-block: 18px 10px;
+
+  font-family: var(--ion-font-family);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 18px;
+
+  padding-inline: 3rem;
+}
+
+.card-button-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  padding-inline: 2rem;
+  padding-block: 0.5rem;
+
+  /* border-top: 2px solid #6868681d; */
+  background-color: rgb(245, 245, 245);
+}
+
+.card-image {
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  max-height: 12rem;
+  width: 100%;
+}

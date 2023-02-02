@@ -1,0 +1,25 @@
+.form-container {
+  max-width: 80%;
+  margin-inline: auto;
+}
+.form-button-container {
+  padding-block-start: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+ion-item {
+  padding: 0.5rem;
+}
+
+ion-select {
+  padding: 1.5rem;
+}
+
+.check-box-container {
+  padding-block: 1.5rem;
+}
+
+ion-buttons {
+  margin: auto;
+}
