@@ -23,26 +23,31 @@ export const Clients = () => {
   }, []);
 
   const fetchClients = () => {
-    dataService.fetchData(dataURL.client).then((data) => setClientList(data));
+    dataService.fetchData(dataURL.clients).then((data) => setClientList(data));
   };
 
-  const submitNewObj = () => {};
+  const submitNewElement = () => {
+    if (clientUnit) {
+      if (clientUnit.nom !== "" && clientUnit.prenom !== "" && clientUnit.telephone !== "") {
+        dataService.postData(dataURL.clients, clientUnit).then(() => fetchClients());
+      }
+    }
+  };
 
   /**
    * @param e click event
    */
-  const submitEditedObj = (clickEvent: any): void => {
-    clickEvent.preventDefault();
-    //props.submitEditedObj(vehiculeEdit.id, vehiculeEdit);
+  const submitEditedElement = (obj: ClientType): void => {
+    dataService.putData(dataURL.clients, obj).then(() => fetchClients());
   };
 
   /**
-   * Efface vehicule selectionné après avoir clické sur
-   * le bouton "delete". Renvoie l'ID du vehicule.
+   * Efface client selectionné après avoir clické sur
+   * le bouton "delete". Renvoie l'ID du client.
    * @param e click event
    */
-  const deleteItem = (): void => {
-    //props.deleteVehicle(props.vehicule.id);
+  const deleteItem = (id: string): void => {
+    dataService.deleteData(dataURL.clients, id).then(() => fetchClients());
   };
 
   const handleInput = (onChangeEvent: any) => {
@@ -70,7 +75,7 @@ export const Clients = () => {
         formToDisplay="client"
         objectToManage={clientUnit}
         handleInput={handleInput}
-        submitModalForm={submitNewObj}></Modal>
+        submitModalForm={submitNewElement}></Modal>
 
       <IonList>
         {clientList &&
@@ -79,7 +84,7 @@ export const Clients = () => {
               <CardLayout
                 key={client.id}
                 elementType={client}
-                submitEditedElement={submitEditedObj}
+                submitEditedElement={submitEditedElement}
                 deleteElement={deleteItem}
                 IsRental={false}
                 triggerModalId={`to-edit-client${client.id}`}

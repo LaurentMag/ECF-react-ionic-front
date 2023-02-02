@@ -9,8 +9,8 @@ type PropsType = {
 };
 
 export const ClientForm = (props: PropsType) => {
-  const handleInput = (e: any) => {
-    props.handleInput(e);
+  const handleInput = (onChangeEvent: any) => {
+    props.handleInput(onChangeEvent);
   };
 
   return (
@@ -23,7 +23,7 @@ export const ClientForm = (props: PropsType) => {
             placeholder="..."
             onIonChange={handleInput}
             clearInput={true}
-            name="modele"
+            name="prenom"
             value={props.objectToManage?.prenom}></IonInput>
         </IonItem>
         <IonItem>
@@ -33,7 +33,7 @@ export const ClientForm = (props: PropsType) => {
             placeholder="..."
             onIonChange={handleInput}
             clearInput={true}
-            name="marque"
+            name="nom"
             value={props.objectToManage?.nom}></IonInput>
         </IonItem>
         <IonItem>
@@ -43,7 +43,7 @@ export const ClientForm = (props: PropsType) => {
             placeholder="..."
             onIonChange={handleInput}
             clearInput={true}
-            name="immatriculation"
+            name="telephone"
             value={props.objectToManage?.telephone}></IonInput>
         </IonItem>
 
@@ -54,17 +54,25 @@ export const ClientForm = (props: PropsType) => {
             placeholder="..."
             onIonChange={handleInput}
             clearInput={true}
-            name="prixJournee"
+            name="email"
             value={props.objectToManage?.email}></IonInput>
         </IonItem>
 
         <IonItem>
           <IonLabel position="stacked">Date de naissance : </IonLabel>
+          <IonDatetime
+            name="dateDeNaissance"
+            display-format="YYYY/MM/DD"
+            onIonChange={handleInput}></IonDatetime>
 
-          <IonInput
+          <IonModal keepContentsMounted={true}>
+            <IonDatetime id="datetime"></IonDatetime>
+          </IonModal>
+
+          {/* <IonInput
             type="date"
             onIonChange={handleInput}
-            name="type"></IonInput>
+            name="type"></IonInput> */}
         </IonItem>
       </IonList>
     </div>

@@ -12,10 +12,6 @@ type PropsType = {
 };
 
 export const VehiculeForm = (props: PropsType) => {
-  /**
-   *
-   * @param e onChange input event
-   */
   const handleInput = (onChangeEvent: any) => {
     props.handleInput(onChangeEvent);
   };

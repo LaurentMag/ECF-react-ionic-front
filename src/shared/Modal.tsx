@@ -34,7 +34,6 @@ export const Modal = (props: PropsType) => {
   };
 
   /**
-   *
    * @param e onChange input event
    */
   const handleInput = (onChangeEvent: any) => {
