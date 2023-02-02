@@ -30,7 +30,7 @@ export const VehiculeCard = (props: PropsType) => {
    */
   const submitEditedObj = (clickEvent: any): void => {
     clickEvent.preventDefault();
-    props.submitEditedObj(vehiculeEdit.id, vehiculeEdit);
+    props.submitEditedObj(vehiculeEdit);
   };
 
   /**

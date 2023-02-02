@@ -22,10 +22,6 @@ export const Vehicles = () => {
     fetchVehicules();
   }, []);
 
-  useEffect(() => {
-    console.log(vehiculeList);
-  }, [vehiculeList]);
-
   const fetchVehicules = () => {
     dataService.fetchData(dataURL.vehicules).then((data) => setVehiculeList(data));
   };
@@ -45,8 +41,8 @@ export const Vehicles = () => {
   };
 
   // VEHICLE EDIT :
-  const submitEditedObj = (id: string, obj: VehiculeType) => {
-    dataService.putData(dataURL.vehicules, id, obj).then(() => fetchVehicules());
+  const submitEditedObj = (obj: VehiculeType) => {
+    dataService.putData(dataURL.vehicules, obj).then(() => fetchVehicules());
   };
 
   // VEHICLE DELETION :

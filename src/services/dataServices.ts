@@ -23,9 +23,9 @@ class DataService {
     });
   };
 
-  putData = (url: string, id: string, data: ClientType | VehiculeType | LocationType) => {
-    return fetch(`${url}/${id}`, {
-      method: "PUT",
+  putData = (url: string, data: ClientType | VehiculeType | LocationType) => {
+    return fetch(`${url}`, {
+      method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
