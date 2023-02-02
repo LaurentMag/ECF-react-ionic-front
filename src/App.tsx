@@ -34,6 +34,7 @@ import "./theme/variables.css";
 import "./css/main.css";
 
 import {Vehicles} from "./features/vehicules/pages/Vehicles";
+import {VehicleDetail} from "./features/vehicules/pages/VehicleDetail";
 
 setupIonicReact();
 
@@ -51,6 +52,10 @@ const App: React.FC = () => (
             exact
             path="/vehicles"
             component={Vehicles}></Route>
+          <Route
+            exact
+            path="/vehicles/:id"
+            component={VehicleDetail}></Route>
           {/* <Route
             exact
             path="/clients"

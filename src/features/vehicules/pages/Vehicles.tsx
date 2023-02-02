@@ -60,7 +60,9 @@ export const Vehicles = () => {
 
   // DISPLAY
   return (
-    <PageLayout title="Vehicules">
+    <PageLayout
+      title="Vehicules"
+      isBackButton={false}>
       <div className="center-button">
         <IonButton id="to-open-modal-vehicle">
           <IonIcon
@@ -88,7 +90,7 @@ export const Vehicles = () => {
                 elementType={vehicule}
                 submitEditedElement={submitEditedElement}
                 deleteElement={deleteItem}
-                IsRental={false}
+                IsRental={true}
                 triggerModalId={`to-edit-client${vehicule.id}`}
                 formType="vehicule">
                 <VehiculeCard element={vehicule} />
