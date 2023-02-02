@@ -2,7 +2,6 @@ export type LocationType = {
   id: string;
   dateDebut: string;
   dateFin: string;
-  prixTotal: number;
   client: {
     id: string;
     nom: string;
@@ -20,5 +19,16 @@ export type LocationType = {
     prixJournee: number;
     disponible: boolean;
     type: string;
+  };
+};
+
+export type LocationTypeToSend = {
+  dateDebut: string;
+  dateFin: string;
+  client: {
+    id: string;
+  };
+  vehicule: {
+    id: string;
   };
 };

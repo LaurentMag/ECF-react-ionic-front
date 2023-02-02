@@ -41,8 +41,6 @@ export const Modal = (props: PropsType) => {
     props.handleInput(onChangeEvent);
   };
 
-  console.log(props.triggerOpenModal);
-
   return (
     <IonModal
       id="modal-style"
@@ -77,7 +75,7 @@ export const Modal = (props: PropsType) => {
             objectToManage={props.objectToManage}
           />
         ) : (
-          <LocationForm />
+          <LocationForm vehicule={props.objectToManage} />
         )}
       </IonContent>
     </IonModal>

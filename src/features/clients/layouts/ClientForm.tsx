@@ -60,14 +60,14 @@ export const ClientForm = (props: PropsType) => {
 
         <IonItem>
           <IonLabel position="stacked">Date de naissance : </IonLabel>
-          <IonDatetime
-            name="dateDeNaissance"
-            display-format="YYYY/MM/DD"
-            onIonChange={handleInput}></IonDatetime>
-
-          <IonModal keepContentsMounted={true}>
-            <IonDatetime id="datetime"></IonDatetime>
-          </IonModal>
+          <IonItem>
+            <IonDatetimeButton datetime="dateDebut"></IonDatetimeButton>
+            <IonModal keepContentsMounted={true}>
+              <IonDatetime
+                id="dateDebut"
+                onIonChange={handleInput}></IonDatetime>
+            </IonModal>
+          </IonItem>
         </IonItem>
       </IonList>
     </div>
