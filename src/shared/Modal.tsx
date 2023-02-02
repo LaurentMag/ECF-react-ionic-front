@@ -1,6 +1,7 @@
 import {IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, IonCheckbox} from "@ionic/react";
 import React, {useRef, useState} from "react";
 import {ClientForm} from "../features/clients/layouts/ClientForm";
+import {LocationForm} from "../features/location/layouts/LocationForm";
 
 import {VehiculeForm} from "../features/vehicules/layouts/VehiculeForm";
 
@@ -40,6 +41,8 @@ export const Modal = (props: PropsType) => {
     props.handleInput(onChangeEvent);
   };
 
+  console.log(props.triggerOpenModal);
+
   return (
     <IonModal
       id="modal-style"
@@ -68,11 +71,13 @@ export const Modal = (props: PropsType) => {
             handleInput={handleInput}
             objectToManage={props.objectToManage}
           />
-        ) : (
+        ) : props.formToDisplay === "clients" ? (
           <ClientForm
             handleInput={handleInput}
             objectToManage={props.objectToManage}
           />
+        ) : (
+          <LocationForm />
         )}
       </IonContent>
     </IonModal>

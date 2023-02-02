@@ -64,7 +64,9 @@ export const CardLayout = (props: PropsType) => {
 
       <div className="card-button-container">
         {props.IsRental && (
-          <IonButton color="success">
+          <IonButton
+            color="success"
+            id={`to-open-modal-location${props.elementType.id}`}>
             <IonIcon icon={key} />
           </IonButton>
         )}
@@ -81,9 +83,13 @@ export const CardLayout = (props: PropsType) => {
       </div>
 
       <Modal
-        modalTitle="Edition :"
-        triggerOpenModal={`${props.triggerModalId}${props.elementType.id}`}
-        formToDisplay={props.formType}
+        modalTitle={props.IsRental ? "Location : " : "Edition : "}
+        triggerOpenModal={
+          props.IsRental
+            ? `to-open-modal-location${props.elementType.id}`
+            : `${props.triggerModalId}${props.elementType.id}`
+        }
+        formToDisplay={props.IsRental ? "location" : props.formType}
         objectToManage={currentElement}
         handleInput={handleInput}
         submitModalForm={submitEditedElement}></Modal>

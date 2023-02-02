@@ -68,11 +68,6 @@ export const ClientForm = (props: PropsType) => {
           <IonModal keepContentsMounted={true}>
             <IonDatetime id="datetime"></IonDatetime>
           </IonModal>
-
-          {/* <IonInput
-            type="date"
-            onIonChange={handleInput}
-            name="type"></IonInput> */}
         </IonItem>
       </IonList>
     </div>

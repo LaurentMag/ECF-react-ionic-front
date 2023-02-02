@@ -72,7 +72,7 @@ export const Clients = () => {
       <Modal
         modalTitle="Nouveau Client :"
         triggerOpenModal="to-open-modal-client"
-        formToDisplay="client"
+        formToDisplay="clients"
         objectToManage={clientUnit}
         handleInput={handleInput}
         submitModalForm={submitNewElement}></Modal>
@@ -88,7 +88,7 @@ export const Clients = () => {
                 deleteElement={deleteItem}
                 IsRental={false}
                 triggerModalId={`to-edit-client${client.id}`}
-                formType="client">
+                formType="clients">
                 <ClientCard element={client} />
               </CardLayout>
             );

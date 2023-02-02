@@ -26,6 +26,13 @@ ion-modal#modal-style {
   background-color: blue;
 }
 
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #696969;
+}
+
 .testHeader {
   box-shadow: 4px 4px 5px 4px rgba(0, 0, 0, 0.074);
 }

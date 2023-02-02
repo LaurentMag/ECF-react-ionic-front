@@ -24,7 +24,7 @@ export const PageLayout = (props: propsType) => {
               src={logo}
             />
           )}
-          <IonTitle>{props.title}</IonTitle>
+          <IonTitle class="page-title">{props.title}</IonTitle>
           {props.isBackButton && (
             <IonButtons slot="start">
               <IonBackButton />

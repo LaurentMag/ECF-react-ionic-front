@@ -11,7 +11,7 @@ export type LocationType = {
     email: string;
     telephone: string;
   };
-  voiture: {
+  vehicule: {
     id: string;
     marque: string;
     modele: string;

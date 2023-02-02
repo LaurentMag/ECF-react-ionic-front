@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 import {VehiculeType} from "../../../type/VehiculeType";
 
 import picture from "../../../assets/carboard-car-thin.png";
-import {help} from "ionicons/icons";
+import {help, arrowForward} from "ionicons/icons";
 import "../../../css/card-style.css";
 
 type PropsType = {
@@ -31,7 +31,7 @@ export const VehiculeCard = (props: PropsType) => {
           <IonButton
             onClick={() => history.push(`/vehicles/${props.element.id}`)}
             color="light">
-            <IonIcon icon={help} />
+            <IonIcon icon={arrowForward} />
           </IonButton>
         </div>
       </IonCardHeader>
