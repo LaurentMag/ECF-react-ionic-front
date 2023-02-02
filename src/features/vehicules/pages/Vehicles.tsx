@@ -11,6 +11,7 @@ import {dataService} from "../../../services/dataServices";
 import {dataURL} from "../../../services/dataUrl";
 import {tools} from "../../../services/tools";
 import {add} from "ionicons/icons";
+import {CardLayout} from "../../../shared/CardLayout";
 
 export const Vehicles = () => {
   // FETCH VEHICLE LIST :
@@ -27,7 +28,7 @@ export const Vehicles = () => {
   };
 
   // VEHICLE CREATION
-  const submitNewObj = () => {
+  const submitNewElement = () => {
     if (
       vehiculeUnite &&
       vehiculeUnite?.marque !== "" &&
@@ -41,12 +42,12 @@ export const Vehicles = () => {
   };
 
   // VEHICLE EDIT :
-  const submitEditedObj = (obj: VehiculeType) => {
+  const submitEditedElement = (obj: VehiculeType) => {
     dataService.putData(dataURL.vehicules, obj).then(() => fetchVehicules());
   };
 
   // VEHICLE DELETION :
-  const deleteVehicle = (id: string) => {
+  const deleteItem = (id: string) => {
     dataService.deleteData(dataURL.vehicules, id).then(() => fetchVehicules());
   };
 
@@ -66,7 +67,7 @@ export const Vehicles = () => {
             slot="start"
             icon={add}
           />
-          Nouveau vehicule
+          Nouveau vehicule :
         </IonButton>
       </div>
 
@@ -76,18 +77,22 @@ export const Vehicles = () => {
         formToDisplay="vehicule"
         objectToManage={vehiculeUnite}
         handleInput={handleInput}
-        submitModalForm={submitNewObj}></Modal>
+        submitModalForm={submitNewElement}></Modal>
 
       <IonList class="list-additional-style">
         {vehiculeList &&
           vehiculeList.map((vehicule) => {
             return (
-              <VehiculeCard
+              <CardLayout
                 key={vehicule.id}
-                vehicule={vehicule}
-                submitEditedObj={submitEditedObj}
-                deleteVehicle={deleteVehicle}
-              />
+                elementType={vehicule}
+                submitEditedElement={submitEditedElement}
+                deleteElement={deleteItem}
+                IsRental={false}
+                triggerModalId={`to-edit-client${vehicule.id}`}
+                formType="vehicule">
+                <VehiculeCard element={vehicule} />
+              </CardLayout>
             );
           })}
       </IonList>
