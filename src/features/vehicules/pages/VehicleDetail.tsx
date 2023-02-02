@@ -13,8 +13,11 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router";
 import {dataService} from "../../../services/dataServices";
 import {dataURL} from "../../../services/dataUrl";
+
 import {PageLayout} from "../../../shared/PageLayout";
 import {VehiculeType} from "../../../type/VehiculeType";
+
+import picture from "../../../assets/car-cardboard.jpg";
 
 export const VehicleDetail = () => {
   const {id} = useParams() as {id: string};
@@ -27,12 +30,13 @@ export const VehicleDetail = () => {
   return (
     <PageLayout
       title="Vehicule détail :"
+      isLogo={false}
       isBackButton={true}>
       <IonCard>
         <img
           className="card-details-image"
           alt="picture placeholder"
-          src="https://thumbs.dreamstime.com/b/red-race-car-made-cardboard-paper-red-race-car-made-cardboard-paper-white-background-104760203.jpg"
+          src={picture}
         />
         <IonCardHeader>
           <IonCardTitle>{fetchedElement && fetchedElement.modele}</IonCardTitle>

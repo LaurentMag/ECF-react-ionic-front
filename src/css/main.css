@@ -21,3 +21,11 @@ ion-modal#modal-style {
   color: rgb(150, 24, 24);
   font-weight: bold;
 }
+
+.page-toolbar-bg-color {
+  background-color: blue;
+}
+
+.testHeader {
+  box-shadow: 4px 4px 5px 4px rgba(0, 0, 0, 0.074);
+}

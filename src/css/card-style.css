@@ -59,6 +59,13 @@
   width: 100%;
 }
 
+.card-image-client {
+  object-fit: cover;
+  object-position: 50% 90%;
+  max-height: 10rem;
+  width: 100%;
+}
+
 .card-details-image {
   object-fit: cover;
   max-height: 20rem;
@@ -67,7 +74,7 @@
 
 .card-image-list {
   object-fit: cover;
-  object-position: 50% 60%;
+  object-position: 50% 9%;
   max-height: 8rem;
   width: 100%;
 }

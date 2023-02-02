@@ -3,8 +3,8 @@ import React, {Fragment, useState} from "react";
 import {useHistory} from "react-router-dom";
 
 import {VehiculeType} from "../../../type/VehiculeType";
-import {Modal} from "../../../shared/Modal";
 
+import picture from "../../../assets/carboard-car-thin.png";
 import {help} from "ionicons/icons";
 import "../../../css/card-style.css";
 
@@ -20,7 +20,7 @@ export const VehiculeCard = (props: PropsType) => {
       <img
         className="card-image-list"
         alt="picture placeholder"
-        src="https://thumbs.dreamstime.com/b/red-race-car-made-cardboard-paper-red-race-car-made-cardboard-paper-white-background-104760203.jpg"
+        src={picture}
       />
       <IonCardHeader class="card-list-custom-header">
         <div className="card-list-custom-header-content">

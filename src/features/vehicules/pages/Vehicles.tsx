@@ -62,6 +62,7 @@ export const Vehicles = () => {
   return (
     <PageLayout
       title="Vehicules"
+      isLogo={true}
       isBackButton={false}>
       <div className="center-button">
         <IonButton id="to-open-modal-vehicle">

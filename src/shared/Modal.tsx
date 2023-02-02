@@ -1,5 +1,6 @@
 import {IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, IonCheckbox} from "@ionic/react";
 import React, {useRef, useState} from "react";
+import {ClientForm} from "../features/clients/layouts/ClientForm";
 
 import {VehiculeForm} from "../features/vehicules/layouts/VehiculeForm";
 
@@ -69,7 +70,10 @@ export const Modal = (props: PropsType) => {
             objectToManage={props.objectToManage}
           />
         ) : (
-          "nada"
+          <ClientForm
+            handleInput={handleInput}
+            objectToManage={props.objectToManage}
+          />
         )}
       </IonContent>
     </IonModal>
