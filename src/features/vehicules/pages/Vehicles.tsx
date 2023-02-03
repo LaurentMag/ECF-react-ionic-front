@@ -77,9 +77,8 @@ export const Vehicles = () => {
     dataService.deleteData(dataURL.vehicules, id).then(() => fetchVehicules());
   };
 
-  const filtre = useRef<string>("all");
-
   const filter = () => {
+    console.log("filtre");
     let filteredVehicles: VehiculeType[] = [];
     if (vehiculeList && filtre.current === "all") {
       filteredVehicles = vehiculeList;
@@ -92,6 +91,12 @@ export const Vehicles = () => {
     }
 
     return filteredVehicles;
+  };
+
+  const filtre = useRef<string>("all");
+
+  const changeRef = (e: any, ref: string) => {
+    filtre.current = ref;
   };
 
   // DISPLAY
@@ -117,13 +122,13 @@ export const Vehicles = () => {
           <IonIcon icon={chevronDownCircle} />
         </IonFabButton>
         <IonFabList side="bottom">
-          <IonFabButton onClick={(e) => (filtre.current = "all")}>
+          <IonFabButton onClick={(e) => changeRef(e, "all")}>
             <IonIcon icon={colorPalette}></IonIcon>
           </IonFabButton>
-          <IonFabButton onClick={(e) => (filtre.current = "dispo")}>
+          <IonFabButton onClick={(e) => changeRef(e, "dispo")}>
             <IonIcon icon={colorPalette}></IonIcon>
           </IonFabButton>
-          <IonFabButton onClick={(e) => (filtre.current = "loue")}>
+          <IonFabButton onClick={(e) => changeRef(e, "loue")}>
             <IonIcon icon={globe}></IonIcon>
           </IonFabButton>
         </IonFabList>
@@ -140,7 +145,7 @@ export const Vehicles = () => {
 
       <IonList class="list-additional-style">
         {vehiculeList &&
-          filter().map((vehicule) => {
+          vehiculeList.map((vehicule) => {
             return (
               <CardLayout
                 key={vehicule.id}
