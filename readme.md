@@ -48,7 +48,7 @@ npm run start
 ```
 
 Vehicules & client seront vide car nouvelle DB, CRUD fonctionnel ainsi que la création de "location"
-BUG : après la création de location nécessité de reload la page de location pour avoir l'affichage de la dernière créé, trop court pour fixer les bug
+BUG : après la création de location nécessité de reload la page de location pour avoir l'affichage de la dernière créé, temps imparti trop court pour fixer le bug
 
 <hr />
 
