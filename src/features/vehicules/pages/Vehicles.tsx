@@ -77,26 +77,22 @@ export const Vehicles = () => {
     dataService.deleteData(dataURL.vehicules, id).then(() => fetchVehicules());
   };
 
-  const filter = () => {
+  const [filter, setFiler] = useState<string>("all");
+
+  const filteredArr = () => {
     console.log("filtre");
     let filteredVehicles: VehiculeType[] = [];
-    if (vehiculeList && filtre.current === "all") {
+    if (vehiculeList && filter === "all") {
       filteredVehicles = vehiculeList;
     }
-    if (vehiculeList && filtre.current === "dispo") {
+    if (vehiculeList && filter === "dispo") {
       filteredVehicles = vehiculeList.filter((vehicule) => vehicule.disponible === true);
     }
-    if (vehiculeList && filtre.current === "loue") {
+    if (vehiculeList && filter === "loue") {
       filteredVehicles = vehiculeList.filter((vehicule) => vehicule.disponible === false);
     }
 
     return filteredVehicles;
-  };
-
-  const filtre = useRef<string>("all");
-
-  const changeRef = (e: any, ref: string) => {
-    filtre.current = ref;
   };
 
   // DISPLAY
@@ -122,13 +118,13 @@ export const Vehicles = () => {
           <IonIcon icon={chevronDownCircle} />
         </IonFabButton>
         <IonFabList side="bottom">
-          <IonFabButton onClick={(e) => changeRef(e, "all")}>
+          <IonFabButton onClick={(e) => setFiler("all")}>
             <IonIcon icon={colorPalette}></IonIcon>
           </IonFabButton>
-          <IonFabButton onClick={(e) => changeRef(e, "dispo")}>
+          <IonFabButton onClick={(e) => setFiler("dispo")}>
             <IonIcon icon={colorPalette}></IonIcon>
           </IonFabButton>
-          <IonFabButton onClick={(e) => changeRef(e, "loue")}>
+          <IonFabButton onClick={(e) => setFiler("loue")}>
             <IonIcon icon={globe}></IonIcon>
           </IonFabButton>
         </IonFabList>
@@ -144,8 +140,8 @@ export const Vehicles = () => {
         submitNewLocationElement={() => {}}></Modal>
 
       <IonList class="list-additional-style">
-        {vehiculeList &&
-          vehiculeList.map((vehicule) => {
+        {filteredArr() &&
+          filteredArr().map((vehicule) => {
             return (
               <CardLayout
                 key={vehicule.id}
