@@ -80,7 +80,6 @@ export const Vehicles = () => {
   const [filter, setFiler] = useState<string>("all");
 
   const filteredArr = () => {
-    console.log("filtre");
     let filteredVehicles: VehiculeType[] = [];
     if (vehiculeList && filter === "all") {
       filteredVehicles = vehiculeList;
