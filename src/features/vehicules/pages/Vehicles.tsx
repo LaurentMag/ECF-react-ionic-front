@@ -13,7 +13,7 @@ import {tools} from "../../../services/tools";
 import {LocationTypeToSend, ModalLocationInputType} from "../../../type/LocationType";
 import {VehiculeType} from "../../../type/VehiculeType";
 
-import {add, chevronDownCircle, colorPalette, globe} from "ionicons/icons";
+import {add, car, chevronDownCircle, colorPalette, globe, key, keyOutline} from "ionicons/icons";
 
 export const Vehicles = () => {
   // FETCH VEHICLE LIST :
@@ -115,17 +115,17 @@ export const Vehicles = () => {
         horizontal="end"
         edge={true}>
         <IonFabButton size="small">
-          <IonIcon icon={chevronDownCircle} />
+          <IonIcon icon={car} />
         </IonFabButton>
         <IonFabList side="bottom">
           <IonFabButton onClick={(e) => setFiler("all")}>
-            <IonIcon icon={colorPalette}></IonIcon>
+            <IonIcon icon={car}></IonIcon>
           </IonFabButton>
           <IonFabButton onClick={(e) => setFiler("dispo")}>
-            <IonIcon icon={colorPalette}></IonIcon>
+            <IonIcon icon={keyOutline}></IonIcon>
           </IonFabButton>
           <IonFabButton onClick={(e) => setFiler("loue")}>
-            <IonIcon icon={globe}></IonIcon>
+            <IonIcon icon={key}></IonIcon>
           </IonFabButton>
         </IonFabList>
       </IonFab>
