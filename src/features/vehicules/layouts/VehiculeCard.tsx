@@ -1,11 +1,11 @@
-import {IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonButton, IonIcon} from "@ionic/react";
-import React, {Fragment, useState} from "react";
+import {IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonIcon} from "@ionic/react";
+import React, {Fragment} from "react";
 import {useHistory} from "react-router-dom";
 
 import {VehiculeType} from "../../../type/VehiculeType";
 
 import picture from "../../../assets/carboard-car-thin.png";
-import {help, arrowForward} from "ionicons/icons";
+import {arrowForward} from "ionicons/icons";
 import "../../../css/card-style.css";
 
 type PropsType = {
@@ -18,7 +18,7 @@ export const VehiculeCard = (props: PropsType) => {
   return (
     <Fragment>
       <img
-        className="card-image-list"
+        className="card-image-vehicule-list"
         alt="picture placeholder"
         src={picture}
       />

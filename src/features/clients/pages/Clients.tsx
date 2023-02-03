@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {IonButton, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonList} from "@ionic/react";
+import {IonFabButton, IonIcon, IonList} from "@ionic/react";
 
 import {PageLayout} from "../../../shared/PageLayout";
 import {Modal} from "../../../shared/Modal";
@@ -59,23 +59,22 @@ export const Clients = () => {
       title="Clients"
       isBackButton={false}
       isLogo={true}>
-      <div className="center-button">
-        <IonButton id="to-open-modal-client">
-          <IonIcon
-            slot="start"
-            icon={add}
-          />
-          Nouveau Client
-        </IonButton>
+      <div slot="fixed">
+        <IonFabButton
+          size="small"
+          id="to-open-modal-client">
+          <IonIcon icon={add} />
+        </IonFabButton>
       </div>
 
       <Modal
-        modalTitle="Nouveau Client :"
+        modalTitle="Ajouter :"
         triggerOpenModal="to-open-modal-client"
         formToDisplay="clients"
         objectToManage={clientUnit}
         handleInput={handleInput}
-        submitModalForm={submitNewElement}></Modal>
+        submitNewElement={submitNewElement}
+        submitNewLocationElement={() => {}}></Modal>
 
       <IonList>
         {clientList &&
@@ -88,7 +87,8 @@ export const Clients = () => {
                 deleteElement={deleteItem}
                 IsRental={false}
                 triggerModalId={`to-edit-client${client.id}`}
-                formType="clients">
+                formType="clients"
+                submitNewLocationElement={() => {}}>
                 <ClientCard element={client} />
               </CardLayout>
             );

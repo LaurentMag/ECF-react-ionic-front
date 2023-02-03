@@ -34,5 +34,18 @@ ion-modal#modal-style {
 }
 
 .testHeader {
-  box-shadow: 4px 4px 5px 4px rgba(0, 0, 0, 0.074);
+  box-shadow: 4px 4px 5px 4px rgba(0, 0, 0, 0.057);
+}
+
+.custom-modal-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #696969;
+}
+
+div[slot="fixed"] {
+  top: 10px;
+  left: 10px;
 }

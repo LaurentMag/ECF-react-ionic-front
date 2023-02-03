@@ -1,6 +1,4 @@
-import React, {useState} from "react";
-
-import {IonButton, IonCheckbox, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOption} from "@ionic/react";
+import {IonCheckbox, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOption} from "@ionic/react";
 
 import {VehiculeType} from "../../../type/VehiculeType";
 

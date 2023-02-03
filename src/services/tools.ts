@@ -1,4 +1,10 @@
 class Tools {
+  /**
+   * Function récupérant les valeurs d'inputs pour créer l'objet state.
+   * Associe le nom de l'input identique à l'attribut, pour y assigné sa valeur
+   * @param onChangeEvent Input onChange event
+   * @param setState useState state à changer
+   */
   handleInput(onChangeEvent: any, setState: any): void {
     setState((prevState: any) => {
       return {
@@ -18,26 +24,40 @@ class Tools {
    * vérification des dates
    * @param dateStart
    * @param dateEnd
-   * @param oneDayPrice prix pour une journée
+   * @param prixJournee prix pour une journée
    * @returns prix calculé
    */
-  rentalPriceCalculation = (dateStartparam: string, dateEndparam: string, oneDayPrice: number) => {
+  setRentalPrice = (dateStartparam: string, dateEndparam: string, prixJournee: number): number => {
     const dayConvert: number = 1000 * 60 * 60 * 24;
     const dateStart: Date = new Date(dateStartparam);
     const dateEnd: Date = new Date(dateEndparam);
 
-    let price: number = 0;
-    let getDayCount: number;
+    let prix: number = 0;
+    let jours: number;
 
-    getDayCount = Math.ceil(dateEnd.getTime() - dateStart.getTime()) / dayConvert;
+    jours = Math.ceil(dateEnd.getTime() - dateStart.getTime()) / dayConvert;
 
-    if (getDayCount > 0) {
-      price = getDayCount * oneDayPrice;
+    if (jours > 0) {
+      prix = jours * prixJournee;
     } else {
       console.log(" Séléction de date incorrect pour le calcul de prix ");
     }
 
-    return price;
+    return prix;
+  };
+
+  /**
+   * créer la date du jour au format YYYY/MM//DD
+   * @returns date: string
+   */
+  setTodayDate = (): string => {
+    const date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    return `${year}-${month}-${day}`;
   };
 }
 

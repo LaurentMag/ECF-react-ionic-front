@@ -8,10 +8,12 @@ import {tools} from "../services/tools";
 import {key, create, trash} from "ionicons/icons";
 import "../css/card-style.css";
 import {ClientType} from "../type/ClientType";
+import {ModalLocationInputType} from "../type/LocationType";
 
 type PropsType = {
   elementType: VehiculeType | ClientType;
   submitEditedElement: Function;
+  submitNewLocationElement: Function;
   deleteElement: Function;
 
   triggerModalId: string;
@@ -49,6 +51,10 @@ export const CardLayout = (props: PropsType) => {
     props.submitEditedElement(currentElement);
   };
 
+  const submitNewLocationElement = (locationdata: ModalLocationInputType) => {
+    props.submitNewLocationElement(locationdata);
+  };
+
   /**
    * Efface ELEMENT selectionné après avoir clické sur
    * le bouton "delete". Renvoie l'ID de l'element.
@@ -61,7 +67,7 @@ export const CardLayout = (props: PropsType) => {
   return (
     <IonCard>
       <Fragment>{props.children}</Fragment>
-      <div className="card-button-container">
+      <div className="custom-card-layout-button-container">
         {props.IsRental && (
           <IonButton
             id={`to-open-modal-location${props.elementType.id}`}
@@ -87,7 +93,8 @@ export const CardLayout = (props: PropsType) => {
         formToDisplay={props.formType}
         objectToManage={currentElement}
         handleInput={handleInput}
-        submitModalForm={submitEditedElement}></Modal>
+        submitNewElement={submitEditedElement}
+        submitNewLocationElement={() => {}}></Modal>
 
       {/* MODAL utilisé uniquement pour la location */}
       <Modal
@@ -96,7 +103,8 @@ export const CardLayout = (props: PropsType) => {
         formToDisplay={"locations"}
         objectToManage={currentElement}
         handleInput={handleInput}
-        submitModalForm={submitEditedElement}></Modal>
+        submitNewElement={submitEditedElement}
+        submitNewLocationElement={submitNewLocationElement}></Modal>
     </IonCard>
   );
 };

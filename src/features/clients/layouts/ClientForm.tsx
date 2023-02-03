@@ -1,6 +1,5 @@
 import {IonList, IonItem, IonLabel, IonInput, IonDatetime, IonDatetimeButton, IonModal} from "@ionic/react";
 import React from "react";
-import {tools} from "../../../services/tools";
 import {ClientType} from "../../../type/ClientType";
 
 type PropsType = {
@@ -65,7 +64,8 @@ export const ClientForm = (props: PropsType) => {
             <IonModal keepContentsMounted={true}>
               <IonDatetime
                 id="dateDebut"
-                onIonChange={handleInput}></IonDatetime>
+                onIonChange={handleInput}
+                value={props.objectToManage?.dateDeNaissance}></IonDatetime>
             </IonModal>
           </IonItem>
         </IonItem>

@@ -32,3 +32,10 @@ export type LocationTypeToSend = {
     id: string;
   };
 };
+
+export type ModalLocationInputType = {
+  dateDebut: string;
+  dateFin: string;
+  idClient: string;
+  idVehicule: string;
+};

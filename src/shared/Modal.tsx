@@ -1,9 +1,10 @@
-import {IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent, IonCheckbox} from "@ionic/react";
-import React, {useRef, useState} from "react";
+import {IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonContent} from "@ionic/react";
+import React, {useRef} from "react";
 import {ClientForm} from "../features/clients/layouts/ClientForm";
 import {LocationForm} from "../features/location/layouts/LocationForm";
 
 import {VehiculeForm} from "../features/vehicules/layouts/VehiculeForm";
+import {ModalLocationInputType} from "../type/LocationType";
 
 type PropsType = {
   modalTitle: string;
@@ -11,7 +12,8 @@ type PropsType = {
   formToDisplay: string;
   objectToManage: any;
   handleInput: Function;
-  submitModalForm: Function;
+  submitNewElement: Function;
+  submitNewLocationElement: Function;
 };
 
 export const Modal = (props: PropsType) => {
@@ -21,16 +23,23 @@ export const Modal = (props: PropsType) => {
     modalRef.current?.dismiss();
   };
 
+  const storeModalLocationData = useRef<ModalLocationInputType>();
+
   /**
    * Clique sur l'ionBoutons "valider" dans le header de la modale
    * invoke la fonction de submit provenant du parent.
    * Puis ferme la modale
    * @param clickEvent
    */
-  const validateData = (clickEvent: any) => {
+  const validateData = (clickEvent: any, locationdata: ModalLocationInputType | null) => {
     clickEvent.preventDefault();
 
-    props.submitModalForm(clickEvent);
+    props.submitNewElement(clickEvent);
+
+    if (locationdata !== null || locationdata !== undefined) {
+      props.submitNewLocationElement(storeModalLocationData.current);
+    }
+
     modalRef.current?.dismiss();
   };
 
@@ -41,6 +50,12 @@ export const Modal = (props: PropsType) => {
     props.handleInput(onChangeEvent);
   };
 
+  const getModalLocationData = (locationdata: ModalLocationInputType) => {
+    if (locationdata !== undefined && locationdata.dateDebut && locationdata.dateFin && locationdata.idClient) {
+      storeModalLocationData.current = locationdata;
+    }
+  };
+
   return (
     <IonModal
       id="modal-style"
@@ -49,7 +64,7 @@ export const Modal = (props: PropsType) => {
       initialBreakpoint={0.85}>
       <IonHeader>
         <IonToolbar>
-          <IonTitle> {props.modalTitle} </IonTitle>
+          <IonTitle class="custom-modal-title"> {props.modalTitle} </IonTitle>
           <IonButtons slot="start">
             <IonButton
               color="medium"
@@ -59,7 +74,7 @@ export const Modal = (props: PropsType) => {
           </IonButtons>
 
           <IonButtons slot="end">
-            <IonButton onClick={validateData}>Valider</IonButton>
+            <IonButton onClick={(e) => validateData(e, null)}>Valider</IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>
@@ -75,7 +90,10 @@ export const Modal = (props: PropsType) => {
             objectToManage={props.objectToManage}
           />
         ) : (
-          <LocationForm vehicule={props.objectToManage} />
+          <LocationForm
+            vehicule={props.objectToManage}
+            getLocationData={getModalLocationData}
+          />
         )}
       </IonContent>
     </IonModal>

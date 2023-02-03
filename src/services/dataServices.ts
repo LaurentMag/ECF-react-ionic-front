@@ -1,7 +1,7 @@
 import {dataURL} from "./dataUrl";
 import {VehiculeType} from "../type/VehiculeType";
 import {ClientType} from "../type/ClientType";
-import {LocationType} from "../type/LocationType";
+import {LocationTypeToSend} from "../type/LocationType";
 
 class DataService {
   fetchData = (url: string) => {
@@ -12,7 +12,7 @@ class DataService {
     return fetch(`${url}/${id}`).then((res) => res.json());
   };
 
-  postData = (url: string, data: ClientType | VehiculeType | LocationType) => {
+  postData = (url: string, data: ClientType | VehiculeType | LocationTypeToSend) => {
     return fetch(`${url}`, {
       method: "POST",
       body: JSON.stringify(data),
@@ -23,7 +23,7 @@ class DataService {
     });
   };
 
-  putData = (url: string, data: ClientType | VehiculeType | LocationType) => {
+  putData = (url: string, data: ClientType | VehiculeType | LocationTypeToSend) => {
     return fetch(`${url}`, {
       method: "POST",
       body: JSON.stringify(data),

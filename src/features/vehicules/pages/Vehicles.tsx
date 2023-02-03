@@ -1,23 +1,27 @@
-import React, {useEffect, useRef, useState} from "react";
-import {IonButton, IonIcon, IonList} from "@ionic/react";
+import React, {useEffect, useState} from "react";
+import {IonFabButton, IonIcon, IonList} from "@ionic/react";
 
 import {PageLayout} from "../../../shared/PageLayout";
 import {Modal} from "../../../shared/Modal";
+import {CardLayout} from "../../../shared/CardLayout";
 import {VehiculeCard} from "../layouts/VehiculeCard";
-
-import {VehiculeType} from "../../../type/VehiculeType";
 
 import {dataService} from "../../../services/dataServices";
 import {dataURL} from "../../../services/dataUrl";
 import {tools} from "../../../services/tools";
+
+import {LocationTypeToSend, ModalLocationInputType} from "../../../type/LocationType";
+import {VehiculeType} from "../../../type/VehiculeType";
+
 import {add} from "ionicons/icons";
-import {CardLayout} from "../../../shared/CardLayout";
 
 export const Vehicles = () => {
   // FETCH VEHICLE LIST :
   const [vehiculeList, setVehiculeList] = useState<VehiculeType[]>();
   // VEHICLE CREATION :
   const [vehiculeUnite, setVehiculeUnite] = useState<VehiculeType>();
+
+  const [locationState, setLocationState] = useState<LocationTypeToSend>();
 
   useEffect(() => {
     fetchVehicules();
@@ -27,8 +31,16 @@ export const Vehicles = () => {
     dataService.fetchData(dataURL.vehicules).then((data) => setVehiculeList(data));
   };
 
+  /**
+   * @param e onChange input event
+   */
+  const handleInput = (onChangeEvent: any) => {
+    tools.handleInput(onChangeEvent, setVehiculeUnite);
+  };
+
   // VEHICLE CREATION
   const submitNewElement = () => {
+    console.log("submit");
     if (
       vehiculeUnite &&
       vehiculeUnite?.marque !== "" &&
@@ -41,6 +53,22 @@ export const Vehicles = () => {
     }
   };
 
+  const submitNewLocationElement = (locationdata: ModalLocationInputType) => {
+    console.log(locationdata);
+    const createLocationObj: LocationTypeToSend = {
+      dateDebut: locationdata.dateDebut,
+      dateFin: locationdata.dateFin,
+      client: {
+        id: locationdata.idClient,
+      },
+      vehicule: {
+        id: locationdata.idVehicule,
+      },
+    };
+
+    dataService.postData(dataURL.locations, createLocationObj);
+  };
+
   // VEHICLE EDIT :
   const submitEditedElement = (obj: VehiculeType) => {
     dataService.putData(dataURL.vehicules, obj).then(() => fetchVehicules());
@@ -51,36 +79,28 @@ export const Vehicles = () => {
     dataService.deleteData(dataURL.vehicules, id).then(() => fetchVehicules());
   };
 
-  /**
-   * @param e onChange input event
-   */
-  const handleInput = (onChangeEvent: any) => {
-    tools.handleInput(onChangeEvent, setVehiculeUnite);
-  };
-
   // DISPLAY
   return (
     <PageLayout
       title="Vehicules"
       isLogo={true}
       isBackButton={false}>
-      <div className="center-button">
-        <IonButton id="to-open-modal-vehicle">
-          <IonIcon
-            slot="start"
-            icon={add}
-          />
-          Nouveau vehicule :
-        </IonButton>
+      <div slot="fixed">
+        <IonFabButton
+          size="small"
+          id="to-open-modal-vehicle">
+          <IonIcon icon={add} />
+        </IonFabButton>
       </div>
 
       <Modal
-        modalTitle="Nouveau vehicule :"
+        modalTitle="Ajouter :"
         triggerOpenModal="to-open-modal-vehicle"
         formToDisplay="vehicule"
         objectToManage={vehiculeUnite}
         handleInput={handleInput}
-        submitModalForm={submitNewElement}></Modal>
+        submitNewElement={submitNewElement}
+        submitNewLocationElement={() => {}}></Modal>
 
       <IonList class="list-additional-style">
         {vehiculeList &&
@@ -90,6 +110,7 @@ export const Vehicles = () => {
                 key={vehicule.id}
                 elementType={vehicule}
                 submitEditedElement={submitEditedElement}
+                submitNewLocationElement={submitNewLocationElement}
                 deleteElement={deleteItem}
                 IsRental={true}
                 triggerModalId={`to-edit-client${vehicule.id}`}

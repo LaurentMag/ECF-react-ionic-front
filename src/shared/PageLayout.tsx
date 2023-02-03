@@ -1,4 +1,5 @@
 import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonBackButton, IonButtons} from "@ionic/react";
+import {add} from "ionicons/icons";
 import React from "react";
 
 import logo from "../assets/localib-logo-nobg.png";

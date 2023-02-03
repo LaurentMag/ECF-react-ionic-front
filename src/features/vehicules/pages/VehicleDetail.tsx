@@ -1,14 +1,4 @@
-import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
+import {IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle} from "@ionic/react";
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router";
 import {dataService} from "../../../services/dataServices";
@@ -32,29 +22,23 @@ export const VehicleDetail = () => {
       title="Vehicule détail :"
       isLogo={false}
       isBackButton={true}>
-      <IonCard>
+      <div>
         <img
-          className="card-details-image"
+          className="card-page-details-image"
           alt="picture placeholder"
           src={picture}
         />
-        <IonCardHeader>
+        <IonCardHeader class="custom-card-bottom-border">
           <IonCardTitle>{fetchedElement && fetchedElement.modele}</IonCardTitle>
-          <IonCardSubtitle class="custom-card-detail-subtitle">
-            {fetchedElement && fetchedElement.marque}
-          </IonCardSubtitle>
+          <IonCardSubtitle class="custom-card-subtitle">{fetchedElement && fetchedElement.marque}</IonCardSubtitle>
         </IonCardHeader>
-        <IonCardContent class="vehicle-card-content">
-          <IonCardSubtitle class="custom-card-detail-subtitle">
+        <IonCardContent class="custom-card-content ">
+          <IonCardSubtitle class="custom-card-subtitle">
             Immatriculation : {fetchedElement && fetchedElement.immatriculation}
           </IonCardSubtitle>
-          <IonCardSubtitle class="custom-card-detail-subtitle">
-            Type : {fetchedElement && fetchedElement.type}
-          </IonCardSubtitle>
-          <IonCardSubtitle class="custom-card-detail-subtitle">
-            Etat : {fetchedElement && fetchedElement.etat}
-          </IonCardSubtitle>
-          <IonCardSubtitle class="custom-card-detail-subtitle">
+          <IonCardSubtitle class="custom-card-subtitle">Type : {fetchedElement && fetchedElement.type}</IonCardSubtitle>
+          <IonCardSubtitle class="custom-card-subtitle">Etat : {fetchedElement && fetchedElement.etat}</IonCardSubtitle>
+          <IonCardSubtitle class="custom-card-subtitle">
             Par jour : {fetchedElement && fetchedElement.prixJournee}€
           </IonCardSubtitle>
         </IonCardContent>
@@ -62,7 +46,7 @@ export const VehicleDetail = () => {
         <p className={`location-text-detail ${fetchedElement && fetchedElement.disponible ? "disponible" : "loue"}`}>
           {fetchedElement && fetchedElement.disponible ? "Disponible" : "Loué"}
         </p>
-      </IonCard>
+      </div>
     </PageLayout>
   );
 };
