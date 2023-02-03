@@ -1,4 +1,4 @@
-import {IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonIcon} from "@ionic/react";
+import {IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonIcon, IonFabButton} from "@ionic/react";
 import React, {Fragment} from "react";
 import {useHistory} from "react-router-dom";
 
@@ -28,11 +28,12 @@ export const VehiculeCard = (props: PropsType) => {
             <IonCardTitle>{props.element.modele}</IonCardTitle>
             <IonCardSubtitle>{props.element.marque}</IonCardSubtitle>
           </div>
-          <IonButton
+          <IonFabButton
             onClick={() => history.push(`/vehicles/${props.element.id}`)}
-            color="light">
+            color="dark"
+            size="small">
             <IonIcon icon={arrowForward} />
-          </IonButton>
+          </IonFabButton>
         </div>
       </IonCardHeader>
 

@@ -1,4 +1,4 @@
-import {IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent} from "@ionic/react";
+import {IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonCard} from "@ionic/react";
 import React, {Fragment} from "react";
 import {LocationType} from "../../../type/LocationType";
 
@@ -8,13 +8,25 @@ type PropsType = {
 
 export const LocationCard = (props: PropsType) => {
   return (
-    <Fragment>
+    <IonCard>
       <IonCardHeader>
-        <IonCardTitle>Card Title</IonCardTitle>
-        <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
+        <IonCardSubtitle>Client : </IonCardSubtitle>
+        <IonCardTitle class="custom-card-location-title">
+          {props.location.client.prenom}, {props.location.client.nom}
+        </IonCardTitle>
       </IonCardHeader>
 
-      <IonCardContent>Here's a small text description for the card content. Nothing more, nothing less.</IonCardContent>
-    </Fragment>
+      <IonCardHeader>
+        <IonCardSubtitle>Vehicule: </IonCardSubtitle>
+        <IonCardTitle class="custom-card-location-title">
+          {props.location.vehicule.modele}, {props.location.vehicule.marque}
+        </IonCardTitle>
+      </IonCardHeader>
+
+      <IonCardContent>
+        <IonCardSubtitle>Date de début : {props.location.dateDebut}</IonCardSubtitle>
+        <IonCardSubtitle>Date de fin : {props.location.dateFin}</IonCardSubtitle>
+      </IonCardContent>
+    </IonCard>
   );
 };

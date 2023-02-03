@@ -86,3 +86,7 @@
 
   background-color: rgb(245, 245, 245);
 }
+
+.custom-card-location-title {
+  font-size: 1.3rem;
+}

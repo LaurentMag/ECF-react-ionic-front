@@ -3,6 +3,7 @@ import {dataService} from "../../../services/dataServices";
 import {dataURL} from "../../../services/dataUrl";
 import {PageLayout} from "../../../shared/PageLayout";
 import {LocationType} from "../../../type/LocationType";
+import {LocationCard} from "../layouts/LocationCard";
 
 export const Location = () => {
   const [locationList, setLocationList] = useState<LocationType[]>();
@@ -24,10 +25,10 @@ export const Location = () => {
         {locationList &&
           locationList.map((location) => {
             return (
-              <div key={location.id}>
-                <p>{location.client.nom}</p>
-                <p>{location.vehicule.modele}</p>
-              </div>
+              <LocationCard
+                key={location.id}
+                location={location}
+              />
             );
           })}
       </div>

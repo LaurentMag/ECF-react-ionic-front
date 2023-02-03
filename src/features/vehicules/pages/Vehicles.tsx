@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {IonFabButton, IonIcon, IonList} from "@ionic/react";
+import React, {useEffect, useRef, useState} from "react";
+import {IonFab, IonFabButton, IonFabList, IonIcon, IonList} from "@ionic/react";
 
 import {PageLayout} from "../../../shared/PageLayout";
 import {Modal} from "../../../shared/Modal";
@@ -13,15 +13,13 @@ import {tools} from "../../../services/tools";
 import {LocationTypeToSend, ModalLocationInputType} from "../../../type/LocationType";
 import {VehiculeType} from "../../../type/VehiculeType";
 
-import {add} from "ionicons/icons";
+import {add, chevronDownCircle, colorPalette, globe} from "ionicons/icons";
 
 export const Vehicles = () => {
   // FETCH VEHICLE LIST :
   const [vehiculeList, setVehiculeList] = useState<VehiculeType[]>();
   // VEHICLE CREATION :
   const [vehiculeUnite, setVehiculeUnite] = useState<VehiculeType>();
-
-  const [locationState, setLocationState] = useState<LocationTypeToSend>();
 
   useEffect(() => {
     fetchVehicules();
@@ -79,6 +77,23 @@ export const Vehicles = () => {
     dataService.deleteData(dataURL.vehicules, id).then(() => fetchVehicules());
   };
 
+  const filtre = useRef<string>("all");
+
+  const filter = () => {
+    let filteredVehicles: VehiculeType[] = [];
+    if (vehiculeList && filtre.current === "all") {
+      filteredVehicles = vehiculeList;
+    }
+    if (vehiculeList && filtre.current === "dispo") {
+      filteredVehicles = vehiculeList.filter((vehicule) => vehicule.disponible === true);
+    }
+    if (vehiculeList && filtre.current === "loue") {
+      filteredVehicles = vehiculeList.filter((vehicule) => vehicule.disponible === false);
+    }
+
+    return filteredVehicles;
+  };
+
   // DISPLAY
   return (
     <PageLayout
@@ -93,6 +108,27 @@ export const Vehicles = () => {
         </IonFabButton>
       </div>
 
+      <IonFab
+        slot="fixed"
+        vertical="top"
+        horizontal="end"
+        edge={true}>
+        <IonFabButton size="small">
+          <IonIcon icon={chevronDownCircle} />
+        </IonFabButton>
+        <IonFabList side="bottom">
+          <IonFabButton onClick={(e) => (filtre.current = "all")}>
+            <IonIcon icon={colorPalette}></IonIcon>
+          </IonFabButton>
+          <IonFabButton onClick={(e) => (filtre.current = "dispo")}>
+            <IonIcon icon={colorPalette}></IonIcon>
+          </IonFabButton>
+          <IonFabButton onClick={(e) => (filtre.current = "loue")}>
+            <IonIcon icon={globe}></IonIcon>
+          </IonFabButton>
+        </IonFabList>
+      </IonFab>
+
       <Modal
         modalTitle="Ajouter :"
         triggerOpenModal="to-open-modal-vehicle"
@@ -104,7 +140,7 @@ export const Vehicles = () => {
 
       <IonList class="list-additional-style">
         {vehiculeList &&
-          vehiculeList.map((vehicule) => {
+          filter().map((vehicule) => {
             return (
               <CardLayout
                 key={vehicule.id}
