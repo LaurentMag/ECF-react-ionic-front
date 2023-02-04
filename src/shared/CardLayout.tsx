@@ -28,14 +28,15 @@ type PropsType = {
 
  * - fonctions pour passer du parent à l'enfant ( la modale ) les gestions d'input, et sauvegarde des elements ( crée ou édité )
  * - le contenu de la card affiché avec les props.children
- * - les boutons nécessaires a l'ouverture des IonModales (utilisation de l'ID), un sera affiché ou non dépendant si la location est requit
- * 
- * .
- * 
- * - le composant modales. Une pour les locations ( car limitation changement button id lié aux modals "triggerOpenModal" )
- * "triggerModalId" pour l'édition est passé en props des pages parents (clients & vehicules), hors celui des location est déf dans ce composant
+ * - les boutons nécessaires a l'ouverture des IonModales (utilisation de l'ID), 
+ *   un sera affiché ou non dépendant si la location est requit (isRental)
+ * - le composant modales.
+ * _____
+ *  Une modale pour les locations ( Limitations des button id lié aux modals "triggerOpenModal" )
+ * "triggerModalId" pour l'édition est passé en props des pages parents (clients & vehicules), 
+ *  hors celui des location est déf dans ce composant
  * ( solutions pour garder qu'un composant ? )
- *
+ * _____
  * @param props Composent props
  * @returns JSX
  */

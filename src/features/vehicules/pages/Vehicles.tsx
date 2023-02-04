@@ -14,12 +14,15 @@ import {LocationTypeToSend, ModalLocationInputType} from "../../../type/Location
 import {VehiculeType} from "../../../type/VehiculeType";
 
 import {add, car, chevronDownCircle, colorPalette, globe, key, keyOutline} from "ionicons/icons";
+import {FabFilter} from "../layouts/FabFilter";
 
 export const Vehicles = () => {
   // FETCH VEHICLE LIST :
   const [vehiculeList, setVehiculeList] = useState<VehiculeType[]>();
   // VEHICLE CREATION :
   const [vehiculeUnite, setVehiculeUnite] = useState<VehiculeType>();
+  // filter coming from FabFilter component, sending state for it to update it
+  const [filter, setFiler] = useState<string>("all");
 
   useEffect(() => {
     fetchVehicules();
@@ -38,7 +41,6 @@ export const Vehicles = () => {
 
   // VEHICLE CREATION
   const submitNewElement = () => {
-    console.log("submit");
     if (
       vehiculeUnite &&
       vehiculeUnite?.marque !== "" &&
@@ -52,7 +54,6 @@ export const Vehicles = () => {
   };
 
   const submitNewLocationElement = (locationdata: ModalLocationInputType) => {
-    console.log(locationdata);
     const createLocationObj: LocationTypeToSend = {
       dateDebut: locationdata.dateDebut,
       dateFin: locationdata.dateFin,
@@ -77,23 +78,6 @@ export const Vehicles = () => {
     dataService.deleteData(dataURL.vehicules, id).then(() => fetchVehicules());
   };
 
-  const [filter, setFiler] = useState<string>("all");
-
-  const filteredArr = () => {
-    let filteredVehicles: VehiculeType[] = [];
-    if (vehiculeList && filter === "all") {
-      filteredVehicles = vehiculeList;
-    }
-    if (vehiculeList && filter === "dispo") {
-      filteredVehicles = vehiculeList.filter((vehicule) => vehicule.disponible === true);
-    }
-    if (vehiculeList && filter === "loue") {
-      filteredVehicles = vehiculeList.filter((vehicule) => vehicule.disponible === false);
-    }
-
-    return filteredVehicles;
-  };
-
   // DISPLAY
   return (
     <PageLayout
@@ -108,26 +92,7 @@ export const Vehicles = () => {
         </IonFabButton>
       </div>
 
-      <IonFab
-        slot="fixed"
-        vertical="top"
-        horizontal="end"
-        edge={true}>
-        <IonFabButton size="small">
-          <IonIcon icon={car} />
-        </IonFabButton>
-        <IonFabList side="bottom">
-          <IonFabButton onClick={(e) => setFiler("all")}>
-            <IonIcon icon={car}></IonIcon>
-          </IonFabButton>
-          <IonFabButton onClick={(e) => setFiler("dispo")}>
-            <IonIcon icon={keyOutline}></IonIcon>
-          </IonFabButton>
-          <IonFabButton onClick={(e) => setFiler("loue")}>
-            <IonIcon icon={key}></IonIcon>
-          </IonFabButton>
-        </IonFabList>
-      </IonFab>
+      <FabFilter setStateFilter={setFiler} />
 
       <Modal
         modalTitle="Ajouter :"
@@ -139,8 +104,8 @@ export const Vehicles = () => {
         submitNewLocationElement={() => {}}></Modal>
 
       <IonList class="list-additional-style">
-        {filteredArr() &&
-          filteredArr().map((vehicule) => {
+        {vehiculeList &&
+          tools.filteredArr(vehiculeList, filter).map((vehicule) => {
             return (
               <CardLayout
                 key={vehicule.id}

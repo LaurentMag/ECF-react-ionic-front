@@ -1,3 +1,5 @@
+import {VehiculeType} from "../type/VehiculeType";
+
 class Tools {
   /**
    * Function récupérant les valeurs d'inputs pour créer l'objet state.
@@ -44,6 +46,20 @@ class Tools {
     }
 
     return prix;
+  };
+
+  filteredArr = (vehiculeList: VehiculeType[], filter: string) => {
+    let filteredVehicles: VehiculeType[] = [];
+    if (vehiculeList && filter === "all") {
+      filteredVehicles = vehiculeList;
+    }
+    if (vehiculeList && filter === "dispo") {
+      filteredVehicles = vehiculeList.filter((vehicule) => vehicule.disponible === true);
+    }
+    if (vehiculeList && filter === "loue") {
+      filteredVehicles = vehiculeList.filter((vehicule) => vehicule.disponible === false);
+    }
+    return filteredVehicles;
   };
 
   /**
