@@ -9,7 +9,7 @@ import {Console, log} from "console";
 
 export const Debug = () => {
   const [dataJson, setDataJson] = useState<any>();
-  const [buttonsDisable, setButtonsDisable] = useState({clients: true, vehicules: true});
+  const [buttonsDisable, setButtonsDisable] = useState({clients: false, vehicules: false});
 
   const fetchJson = () => {
     return fetch("./ressources.json")
@@ -52,9 +52,11 @@ export const Debug = () => {
       .fetchData(dataURL.clients)
       .then((data) => (tempData = data))
       .then(() => {
-        return tempData.map((obj: any) => {
-          dataService.deleteData(dataURL.clients, obj.id);
-        });
+        if (tempData.length !== 0) {
+          return tempData.map((obj: any) => {
+            dataService.deleteData(dataURL.clients, obj.id);
+          });
+        }
       })
       .then(() => changeClientBtnState());
   };
@@ -65,9 +67,11 @@ export const Debug = () => {
       .fetchData(dataURL.vehicules)
       .then((data) => (tempData = data))
       .then(() => {
-        return tempData.map((obj: any) => {
-          dataService.deleteData(dataURL.vehicules, obj.id);
-        });
+        if (tempData.length !== 0) {
+          return tempData.map((obj: any) => {
+            dataService.deleteData(dataURL.vehicules, obj.id);
+          });
+        }
       })
       .then(() => changeVehiculeBtnState());
   };
@@ -107,7 +111,13 @@ export const Debug = () => {
           </IonButton>
         </div>
       </IonCard>
-      <IonCardSubtitle>* Les clients ou vehicules doivent être effacé avant d'être ajouté de nouveau</IonCardSubtitle>
+      <IonCardSubtitle>
+        * Ne vérifiant pas si des données sont déjà présente. Effacer les données sera requit avant tout ajout.
+      </IonCardSubtitle>
+      <IonCardSubtitle>
+        Les boutons d'ajout seront désactivé après une utilisation, et seront disponible de nouveau si la suppréssion de
+        data aura été faite
+      </IonCardSubtitle>
     </PageLayout>
   );
 };
