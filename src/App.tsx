@@ -10,7 +10,7 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import {IonReactRouter} from "@ionic/react-router";
-import {key, car, sad} from "ionicons/icons";
+import {key, car, sad, archive} from "ionicons/icons";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -37,6 +37,7 @@ import {Vehicles} from "./features/vehicules/pages/Vehicles";
 import {Clients} from "./features/clients/pages/Clients";
 import {VehicleDetail} from "./features/vehicules/pages/VehicleDetail";
 import {Location} from "./features/location/pages/Location";
+import {Debug} from "./features/Debug";
 
 setupIonicReact();
 
@@ -65,6 +66,9 @@ const App: React.FC = () => (
           <Route
             path="/locations"
             component={Location}></Route>
+          <Route
+            path="/debug"
+            component={Debug}></Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton
@@ -84,6 +88,12 @@ const App: React.FC = () => (
             href="/clients">
             <IonIcon icon={sad} />
             <IonLabel>Clients</IonLabel>
+          </IonTabButton>
+          <IonTabButton
+            tab="debug"
+            href="/debug">
+            <IonIcon icon={archive} />
+            <IonLabel>debug</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

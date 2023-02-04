@@ -24,11 +24,18 @@ type PropsType = {
 };
 
 /**
- * Card contain :
- * - display coming from a "cardLayout" with props.children
- * - Button : rent (boolean), edit, delete
- * - Modal (with config )
- * - All function related to currentElement edition ( as card do manage this part ( if needed s))
+ * Contenu du CardLayout :
+
+ * - fonctions pour passer du parent à l'enfant ( la modale ) les gestions d'input, et sauvegarde des elements ( crée ou édité )
+ * - le contenu de la card affiché avec les props.children
+ * - les boutons nécessaires a l'ouverture des IonModales (utilisation de l'ID), un sera affiché ou non dépendant si la location est requit
+ * 
+ * .
+ * 
+ * - le composant modales. Une pour les locations ( car limitation changement button id lié aux modals "triggerOpenModal" )
+ * "triggerModalId" pour l'édition est passé en props des pages parents (clients & vehicules), hors celui des location est déf dans ce composant
+ * ( solutions pour garder qu'un composant ? )
+ *
  * @param props Composent props
  * @returns JSX
  */
@@ -37,6 +44,7 @@ export const CardLayout = (props: PropsType) => {
   const [currentElement, setCurrentElement] = useState<VehiculeType | ClientType>(props.elementType);
 
   /**
+   * invoque la fonction handleInput déclaré dans la class Tools ( gestion des valeurs d'inputs )
    * @param e onChange input event
    */
   const handleInput = (onChangeEvent: any): void => {
@@ -44,6 +52,9 @@ export const CardLayout = (props: PropsType) => {
   };
 
   /**
+   * fait transiter le click event de l'enfant(modale d'édition du client ou véhicule) vers le parent(page client ou véhicule).
+   * Avec l'invocation de la fonction parente "submitEditedElement" passer en props ( props.submitEditedElement).
+   * (utilisation de noms identique entre nom d'attribut et de fonction par soucis de clareté )
    * @param e click event
    */
   const submitEditedElement = (clickEvent: any): void => {
@@ -51,13 +62,20 @@ export const CardLayout = (props: PropsType) => {
     props.submitEditedElement(currentElement);
   };
 
+  /**
+   * Fait transiter les données de locatin issuent du formulaire enfant (modal location)
+   * et de les faire "remonter" à l'element parent ()
+   * @param locationdata
+   */
   const submitNewLocationElement = (locationdata: ModalLocationInputType) => {
     props.submitNewLocationElement(locationdata);
   };
 
   /**
-   * Efface ELEMENT selectionné après avoir clické sur
-   * le bouton "delete". Renvoie l'ID de l'element.
+   * Au click du button "delete", invoque la fonction parent (page client ou véhicule ).
+   * Pour transmettre l'ID de l'element.
+   * CardLayout composant est invoqué lors d'un map des données, et lui est passé en props
+   * les elements individuels. Donc recupération d'ID.
    * @param e click event
    */
   const deleteElement = (): void => {

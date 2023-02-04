@@ -90,3 +90,12 @@
 .custom-card-location-title {
   font-size: 1.3rem;
 }
+
+.debug-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  padding-inline: 15%;
+  padding-block: 2rem;
+}
