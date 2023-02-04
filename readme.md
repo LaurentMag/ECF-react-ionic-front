@@ -48,14 +48,13 @@ npm run start
 ```
 
 Vehicules & client seront vide car nouvelle DB, CRUD fonctionnel ainsi que la création de "location"
-BUG : après la création de location nécessité de reload la page de location pour avoir l'affichage de la dernière créé, temps imparti trop court pour fixer le bug
 
 <hr />
 
 ##### REMPLIR LA DB :
 
-Dans le fichier **ECF-react-ionic-front/ressources.json**
-Une liste d'utilisateur et vehicules sont présent ( ne pas utiliser la liste des locations, à créer par l'application )
+Une tab "debug" à été ajouté pour ajouter des clients / véhicule à la base de donnée en vue de tester l'application.
+/!\ ne devrait pas être conservé autre que pour le dev.
 
 **Avec POSTMAN**
 
