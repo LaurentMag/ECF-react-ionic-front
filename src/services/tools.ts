@@ -54,7 +54,7 @@ class Tools {
    * @param filter (string issue du filtre selectionné)
    * @returns vehicules[] filtré
    */
-  filteredArr = (vehiculeList: VehiculeType[], filter: string) => {
+  filteredArr = (vehiculeList: VehiculeType[], filter: string): VehiculeType[] => {
     let filteredVehicles: VehiculeType[] = [];
     if (vehiculeList && filter === "all") {
       filteredVehicles = vehiculeList;

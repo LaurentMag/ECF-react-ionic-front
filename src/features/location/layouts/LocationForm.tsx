@@ -29,19 +29,19 @@ export const LocationForm = (props: PropsType) => {
 
   const [modalInput, setModalInput] = useState<ModalLocationInputType>();
 
-  const fetchClients = () => {
+  const fetchClients = (): void => {
     dataService.fetchData(dataURL.clients).then((data) => setClientList(data));
   };
 
-  useEffect(() => {
+  useEffect((): void => {
     fetchClients();
   }, []);
 
-  useEffect(() => {
+  useEffect((): void => {
     props.getLocationData(modalInput);
   }, [modalInput]);
 
-  const handleInput = (onChangeEvent: any) => {
+  const handleInput = (onChangeEvent: any): void => {
     const input = onChangeEvent.target;
     setModalInput((prev: any) => {
       return {
@@ -52,7 +52,7 @@ export const LocationForm = (props: PropsType) => {
     });
   };
 
-  const setPrice = () => {
+  const setPrice = (): number | string => {
     let prix: number = 0;
     if (modalInput && modalInput.dateDebut && modalInput.dateFin) {
       prix = tools.setRentalPrice(modalInput.dateDebut, modalInput.dateFin, props.vehicule.prixJournee);

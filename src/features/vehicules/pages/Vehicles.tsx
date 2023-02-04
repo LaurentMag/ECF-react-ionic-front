@@ -64,7 +64,6 @@ export const Vehicles = () => {
         id: locationdata.idVehicule,
       },
     };
-
     dataService.postData(dataURL.locations, createLocationObj);
   };
 

@@ -39,7 +39,6 @@ export const Modal = (props: PropsType) => {
     if (locationdata !== null || locationdata !== undefined) {
       props.submitNewLocationElement(storeModalLocationData.current);
     }
-
     modalRef.current?.dismiss();
   };
 
@@ -50,6 +49,10 @@ export const Modal = (props: PropsType) => {
     props.handleInput(onChangeEvent);
   };
 
+  /**
+   *
+   * @param locationdata
+   */
   const getModalLocationData = (locationdata: ModalLocationInputType) => {
     if (locationdata !== undefined && locationdata.dateDebut && locationdata.dateFin && locationdata.idClient) {
       storeModalLocationData.current = locationdata;

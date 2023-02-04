@@ -12,8 +12,10 @@ export const FabFilter = (props: PropsType) => {
       slot="fixed"
       vertical="top"
       horizontal="end"
-      edge={true}>
-      <IonFabButton size="small">
+      edge={false}>
+      <IonFabButton
+        color="medium"
+        size="small">
         <IonIcon icon={car} />
       </IonFabButton>
       <IonFabList side="bottom">
