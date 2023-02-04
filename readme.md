@@ -55,17 +55,3 @@ Vehicules & client seront vide car nouvelle DB, CRUD fonctionnel ainsi que la cr
 
 Une tab "debug" à été ajouté pour ajouter des clients / véhicule à la base de donnée en vue de tester l'application.
 /!\ ne devrait pas être conservé autre que pour le dev.
-
-**Avec POSTMAN**
-
-Pour ajouter les objets clients individuel en POST :
-
-```
-http://localhost:8080/clients
-```
-
-Pour ajouter les objets vehicules individuel en POST :
-
-```
-http://localhost:8080/vehicules
-```

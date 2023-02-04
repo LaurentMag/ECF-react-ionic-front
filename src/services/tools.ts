@@ -48,6 +48,12 @@ class Tools {
     return prix;
   };
 
+  /**
+   *  Filtre la liste des véhicules en fonction d'un filtre de disponibilité ou de location
+   * @param vehiculeList
+   * @param filter (string issue du filtre selectionné)
+   * @returns vehicules[] filtré
+   */
   filteredArr = (vehiculeList: VehiculeType[], filter: string) => {
     let filteredVehicles: VehiculeType[] = [];
     if (vehiculeList && filter === "all") {
