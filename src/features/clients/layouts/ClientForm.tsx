@@ -4,7 +4,7 @@ import {ClientType} from "../../../type/ClientType";
 
 type PropsType = {
   handleInput: Function;
-  objectToManage: ClientType;
+  elementToManage: ClientType;
 };
 
 export const ClientForm = (props: PropsType) => {
@@ -23,7 +23,7 @@ export const ClientForm = (props: PropsType) => {
             onIonChange={handleInput}
             clearInput={true}
             name="prenom"
-            value={props.objectToManage?.prenom}></IonInput>
+            value={props.elementToManage?.prenom}></IonInput>
         </IonItem>
         <IonItem>
           <IonLabel position="floating">Nom : </IonLabel>
@@ -33,7 +33,7 @@ export const ClientForm = (props: PropsType) => {
             onIonChange={handleInput}
             clearInput={true}
             name="nom"
-            value={props.objectToManage?.nom}></IonInput>
+            value={props.elementToManage?.nom}></IonInput>
         </IonItem>
         <IonItem>
           <IonLabel position="floating">Telephone : </IonLabel>
@@ -43,7 +43,7 @@ export const ClientForm = (props: PropsType) => {
             onIonChange={handleInput}
             clearInput={true}
             name="telephone"
-            value={props.objectToManage?.telephone}></IonInput>
+            value={props.elementToManage?.telephone}></IonInput>
         </IonItem>
 
         <IonItem>
@@ -54,7 +54,7 @@ export const ClientForm = (props: PropsType) => {
             onIonChange={handleInput}
             clearInput={true}
             name="email"
-            value={props.objectToManage?.email}></IonInput>
+            value={props.elementToManage?.email}></IonInput>
         </IonItem>
 
         <IonItem>
@@ -65,7 +65,7 @@ export const ClientForm = (props: PropsType) => {
               <IonDatetime
                 id="dateDebut"
                 onIonChange={handleInput}
-                value={props.objectToManage?.dateDeNaissance}></IonDatetime>
+                value={props.elementToManage?.dateDeNaissance}></IonDatetime>
             </IonModal>
           </IonItem>
         </IonItem>

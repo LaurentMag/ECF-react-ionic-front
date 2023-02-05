@@ -46,7 +46,7 @@ export const Clients = () => {
    * le bouton "delete". Renvoie l'ID du client.
    * @param e click event
    */
-  const deleteItem = (id: string): void => {
+  const deleteElement = (id: string): void => {
     dataService.deleteData(dataURL.clients, id).then(() => fetchClients());
   };
 
@@ -68,13 +68,13 @@ export const Clients = () => {
       </div>
 
       <Modal
-        modalTitle="Ajouter :"
-        triggerOpenModal="to-open-modal-client"
-        formToDisplay="clients"
-        objectToManage={clientUnit}
+        elementToManage={clientUnit}
         handleInput={handleInput}
         submitNewElement={submitNewElement}
-        submitNewLocationElement={() => {}}></Modal>
+        submitNewLocationElement={() => {}}
+        modalTitle="Ajouter :"
+        triggerOpenModal="to-open-modal-client"
+        formToDisplay="clients"></Modal>
 
       <IonList>
         {clientList &&
@@ -82,13 +82,13 @@ export const Clients = () => {
             return (
               <CardLayout
                 key={client.id}
-                elementType={client}
+                elementToManage={client}
                 submitEditedElement={submitEditedElement}
-                deleteElement={deleteItem}
+                submitNewLocationElement={() => {}}
+                deleteElement={deleteElement}
                 IsRental={false}
                 triggerModalId={`to-edit-client${client.id}`}
-                formType="clients"
-                submitNewLocationElement={() => {}}>
+                formToDisplay="clients">
                 <ClientCard element={client} />
               </CardLayout>
             );

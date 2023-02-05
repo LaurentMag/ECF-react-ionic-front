@@ -4,18 +4,44 @@ import {ClientForm} from "../features/clients/layouts/ClientForm";
 import {LocationForm} from "../features/location/layouts/LocationForm";
 
 import {VehiculeForm} from "../features/vehicules/layouts/VehiculeForm";
+import {ClientType} from "../type/ClientType";
 import {ModalLocationInputType} from "../type/LocationType";
+import {VehiculeType} from "../type/VehiculeType";
 
+/**
+ * * elementToManage: Quel objet sera passé en props vers l'input
+ * ( permet de passé l'objet courant en cas d'édition pour récupérer les valeurs);
+ * * handleInput: Function pour que le parent récupére les changements de valeur d'input du "formulaire"
+ * * submitEditedElement : function pour "PUT" un objet édité (client ou véhicule)
+ * * submitNewLocationElement : function pour "POST" un nouvel objet ( client ou véhicule )
+ * * modalTitle: Titre de la modale à afficher;
+ * * triggerOpenModal: l'ID du boutton qui va ouvrir une modale associé;
+ * * formToDisplay: string pour selectionné quel formulaire afficher dans la modale;
+ */
 type PropsType = {
-  modalTitle: string;
-  triggerOpenModal: string;
-  formToDisplay: string;
-  objectToManage: any;
+  // any est conservé car chaque form aura l'objToManage typé.
+  // Si typé créera soucis ou deux type peuvent pas être assigné à un
+  elementToManage: any;
   handleInput: Function;
   submitNewElement: Function;
   submitNewLocationElement: Function;
+  modalTitle: string;
+  triggerOpenModal: string;
+  formToDisplay: string;
 };
 
+/**
+ * Modal générique, contenu :
+ * - Gestion des elements du useRef modal (<HTMLIonModalElement>) pour affichage et fermeture
+ * - En fonction de la props "formToDisplay", change le formulaire à afficher
+ * pour correspondre au parent ( clients - vehicules - location )
+ * - Sauvegarde dans un useRef ( pas de re-render ) l'objet obtenu par le fomulaire de locations
+ * ___
+ * Les informations sont envoyé aux parents respectif par la modal car celle-ci contient les boutons de validations
+ * Contrairements aux formulaires "classique" où la validation se fait dans le même composant.
+ * @param props
+ * @returns
+ */
 export const Modal = (props: PropsType) => {
   const modalRef = useRef<HTMLIonModalElement>(null);
 
@@ -23,12 +49,30 @@ export const Modal = (props: PropsType) => {
     modalRef.current?.dismiss();
   };
 
+  /**
+   * conserve les informations du formulaire de location.
+   * Provient du formaulaire location ( useRef, pas de re-render)
+   */
   const storeModalLocationData = useRef<ModalLocationInputType>();
 
   /**
-   * Clique sur l'ionBoutons "valider" dans le header de la modale
-   * invoke la fonction de submit provenant du parent.
-   * Puis ferme la modale
+   * Function passé en props du formulaire location, permet d'assigner au useRef "storeModalLocationData"
+   * La valeur des inputs du formulaire de location ( *cette fonction sera appelé à chaque change du state où est crée l'obj location* ).
+   * @param locationdata
+   */
+  const getModalLocationData = (locationdata: ModalLocationInputType) => {
+    storeModalLocationData.current = locationdata;
+  };
+
+  /**
+   * Invoqué par le click de l'IonButton "validé" du header de la modal.
+   * ___
+   * Invoque la fonction provenant du parent, "props.submitNewElement", qui récupère le click event du bouton validé.
+   * (*cette fonction sert à "POST" un nouvel element ( client ou véhicule créer par le formulaire associé* ))
+   * ___
+   * Vérifie si le "locationdata" n'est ni null, ni undefined, pour l'envoyer vers une autre fonction issue du parent ( vehicule page )
+   * "props.submitNewLocationElement"
+   *
    * @param clickEvent
    */
   const validateData = (clickEvent: any, locationdata: ModalLocationInputType | null) => {
@@ -43,20 +87,12 @@ export const Modal = (props: PropsType) => {
   };
 
   /**
+   * Invoque la fonction handleInput déclaré dans la class Tools ( gestion des valeurs d'inputs )
+   * Transmet au parent les input values issue du composant input utilisé
    * @param e onChange input event
    */
   const handleInput = (onChangeEvent: any) => {
     props.handleInput(onChangeEvent);
-  };
-
-  /**
-   *
-   * @param locationdata
-   */
-  const getModalLocationData = (locationdata: ModalLocationInputType) => {
-    if (locationdata !== undefined && locationdata.dateDebut && locationdata.dateFin && locationdata.idClient) {
-      storeModalLocationData.current = locationdata;
-    }
   };
 
   return (
@@ -68,6 +104,7 @@ export const Modal = (props: PropsType) => {
       <IonHeader>
         <IonToolbar>
           <IonTitle class="custom-modal-title"> {props.modalTitle} </IonTitle>
+
           <IonButtons slot="start">
             <IonButton
               color="medium"
@@ -81,20 +118,21 @@ export const Modal = (props: PropsType) => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
+
       <IonContent className="ion-padding">
         {props.formToDisplay === "vehicule" ? (
           <VehiculeForm
             handleInput={handleInput}
-            objectToManage={props.objectToManage}
+            elementToManage={props.elementToManage}
           />
         ) : props.formToDisplay === "clients" ? (
           <ClientForm
             handleInput={handleInput}
-            objectToManage={props.objectToManage}
+            elementToManage={props.elementToManage}
           />
         ) : (
           <LocationForm
-            vehicule={props.objectToManage}
+            vehicule={props.elementToManage}
             getLocationData={getModalLocationData}
           />
         )}
@@ -104,7 +142,6 @@ export const Modal = (props: PropsType) => {
 };
 
 /* 
-
   const [canDismiss, setCanDismiss] = useState(false);
 
 // ION MODAL ATTTRIBUTE

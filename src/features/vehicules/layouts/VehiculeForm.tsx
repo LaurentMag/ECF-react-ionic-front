@@ -6,7 +6,7 @@ import "../../../css/form.css";
 
 type PropsType = {
   handleInput: Function;
-  objectToManage: VehiculeType;
+  elementToManage: VehiculeType;
 };
 
 export const VehiculeForm = (props: PropsType) => {
@@ -25,7 +25,7 @@ export const VehiculeForm = (props: PropsType) => {
             onIonChange={handleInput}
             clearInput={true}
             name="modele"
-            value={props.objectToManage?.modele}></IonInput>
+            value={props.elementToManage?.modele}></IonInput>
         </IonItem>
         <IonItem>
           <IonLabel position="floating">Marque : </IonLabel>
@@ -35,7 +35,7 @@ export const VehiculeForm = (props: PropsType) => {
             onIonChange={handleInput}
             clearInput={true}
             name="marque"
-            value={props.objectToManage?.marque}></IonInput>
+            value={props.elementToManage?.marque}></IonInput>
         </IonItem>
         <IonItem>
           <IonLabel position="floating">Immatriculation : </IonLabel>
@@ -45,7 +45,7 @@ export const VehiculeForm = (props: PropsType) => {
             onIonChange={handleInput}
             clearInput={true}
             name="immatriculation"
-            value={props.objectToManage?.immatriculation}></IonInput>
+            value={props.elementToManage?.immatriculation}></IonInput>
         </IonItem>
         <IonItem>
           <IonLabel>Etat : </IonLabel>
@@ -54,7 +54,7 @@ export const VehiculeForm = (props: PropsType) => {
             onIonChange={handleInput}
             name="etat"
             cancelText="Annuler"
-            value={props.objectToManage?.etat}>
+            value={props.elementToManage?.etat}>
             <IonSelectOption value="A">A</IonSelectOption>
             <IonSelectOption value="B">B</IonSelectOption>
             <IonSelectOption value="C">C</IonSelectOption>
@@ -73,7 +73,7 @@ export const VehiculeForm = (props: PropsType) => {
             onIonChange={handleInput}
             clearInput={true}
             name="prixJournee"
-            value={props.objectToManage?.prixJournee}></IonInput>
+            value={props.elementToManage?.prixJournee}></IonInput>
         </IonItem>
 
         <IonItem>
@@ -84,7 +84,7 @@ export const VehiculeForm = (props: PropsType) => {
             onIonChange={handleInput}
             clearInput={true}
             name="type"
-            value={props.objectToManage?.type}></IonInput>
+            value={props.elementToManage?.type}></IonInput>
         </IonItem>
 
         <div className="check-box-container">
@@ -93,9 +93,9 @@ export const VehiculeForm = (props: PropsType) => {
               slot="end"
               name="disponible"
               onIonChange={handleInput}
-              checked={props.objectToManage?.disponible}></IonCheckbox>
-            <IonLabel class={`${props.objectToManage?.disponible ? "disponible" : "loue"}`}>
-              {props.objectToManage?.disponible ? "Disponible" : "Indisponible"}
+              checked={props.elementToManage?.disponible}></IonCheckbox>
+            <IonLabel class={`${props.elementToManage?.disponible ? "disponible" : "loue"}`}>
+              {props.elementToManage?.disponible ? "Disponible" : "Indisponible"}
             </IonLabel>
           </IonItem>
         </div>

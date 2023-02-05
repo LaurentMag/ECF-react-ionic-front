@@ -37,8 +37,13 @@ export const LocationForm = (props: PropsType) => {
     fetchClients();
   }, []);
 
+  /**
+   * UseEffect
+   */
   useEffect((): void => {
-    props.getLocationData(modalInput);
+    if (modalInput !== undefined && modalInput.dateDebut && modalInput.dateFin && modalInput.idClient) {
+      props.getLocationData(modalInput);
+    }
   }, [modalInput]);
 
   const handleInput = (onChangeEvent: any): void => {
