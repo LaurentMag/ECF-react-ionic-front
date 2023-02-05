@@ -22,8 +22,30 @@ class Tools {
   }
 
   /**
+   * Function récupérant les valeurs d'inputs pour créer l'objet location.
+   * Assigne à chaque changement de valeur l'id du vehicule à louer, et assigne soit la valeur d'input (id du client)
+   * soit les dates de locations
+   * @param onChangeEvent Input onChange event
+   * @param setState useState state à changer
+   * @param propsVehicule : propsVehicule contenant l'objet véhicule passé au form location
+   */
+  handleInputLocation(onChangeEvent: any, setState: any, propsVehicule: any): void {
+    const input = onChangeEvent.target;
+    setState((prev: any) => {
+      return {
+        ...prev,
+        idVehicule: propsVehicule.id,
+        [input.name]: input.nodeName === "ION-DATETIME" ? input.value.split("T")[0] : input.value,
+      };
+    });
+  }
+
+  /**
    * calcule le prix en se basant sur les dates de début et de fin de location
    * vérification des dates
+   * ___
+   * Vérification si la date de début de location est bien avant la date de fin de location.
+   * Sinon aucun prix ne sera calculé
    * @param dateStart
    * @param dateEnd
    * @param prixJournee prix pour une journée

@@ -25,20 +25,32 @@ type PropsType = {
 };
 
 export const LocationForm = (props: PropsType) => {
+  /**
+   * state contenant la liste des clients ( fetch pour l'input select et avoir la liste des clients )
+   */
   const [clientList, setClientList] = useState<ClientType[]>();
 
+  /**
+   * state contenant l'objet rassemblant les valeurs des inputs de la location (*date de début, de fin, l'id du client et véhicule )
+   */
   const [modalInput, setModalInput] = useState<ModalLocationInputType>();
-
+  /**
+   * function déclenchant le fetch des clients, défini dans la class "DataService"
+   */
   const fetchClients = (): void => {
     dataService.fetchData(dataURL.clients).then((data) => setClientList(data));
   };
 
+  /**
+   * Fetch des clients au "mount" du composant ,[]
+   */
   useEffect((): void => {
     fetchClients();
   }, []);
 
   /**
-   * UseEffect
+   * UseEffect invoquant la fonction parente "props.getLocationData".
+   * verification si le state modalInput contient toutes les valeurs requises avant d'invoquer l'invocation de la fonction parente.
    */
   useEffect((): void => {
     if (modalInput !== undefined && modalInput.dateDebut && modalInput.dateFin && modalInput.idClient) {
@@ -46,17 +58,19 @@ export const LocationForm = (props: PropsType) => {
     }
   }, [modalInput]);
 
+  /**
+   * Invoque la function "tools.handleInputLocation" pour créer l'objet "modalInput" en fonction des valeurs enregistré dans les inputs
+   * @param onChangeEvent input change event
+   */
   const handleInput = (onChangeEvent: any): void => {
-    const input = onChangeEvent.target;
-    setModalInput((prev: any) => {
-      return {
-        ...prev,
-        idVehicule: props.vehicule.id,
-        [input.name]: input.nodeName === "ION-DATETIME" ? input.value.split("T")[0] : input.value,
-      };
-    });
+    tools.handleInputLocation(onChangeEvent, modalInput, props.vehicule);
   };
 
+  /**
+   * Affiche le prix de la location dans la modale.
+   * Vérifie si le state modaleInput existe, et si les dates de début et fin sont bien renseigné avant de calculer le prix "tools.setRentalPrice"
+   * @returns message à afficher, le prix, ou un string
+   */
   const setPrice = (): number | string => {
     let prix: number = 0;
     if (modalInput && modalInput.dateDebut && modalInput.dateFin) {
